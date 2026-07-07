@@ -34,11 +34,11 @@ public class AddTicketTypeCommandHandler : IRequestHandler<AddTicketTypeCommand,
         }
 
         var ticketType = new TicketType(
+            Guid.NewGuid(), //TODO: Arrumar depois para passar o id correto do event
             request.Name,
             request.Tier,
             request.Price,
-            request.TotalQuantity,
-            request.AvailableQuantity);
+            request.TotalQuantity);
 
         existing.TicketTypes.Add(ticketType);
         

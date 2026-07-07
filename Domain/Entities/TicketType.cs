@@ -3,6 +3,7 @@ namespace TicketHub.Domain.Entities;
 public class TicketType
 {
     public Guid Id { get; set; }
+    public Guid EventId { get; set; }
 
     public string Name { get; set; } // Pista, VIP, etc.
 
@@ -12,13 +13,16 @@ public class TicketType
 
     public int TotalQuantity { get; set; }
     public int AvailableQuantity { get; set; }
+    public uint Version { get; set; }
 
-    public TicketType(string name, int tier, decimal price, int totalQuantity, int availableQuantity)
+    public TicketType(Guid eventId, string name, int tier, decimal price, int totalQuantity)
     {
+        Id = Guid.NewGuid();
+        EventId = eventId;
         Name = name;
         Tier = tier;
         Price = price;
         TotalQuantity = totalQuantity;
-        AvailableQuantity = availableQuantity;
+        AvailableQuantity = totalQuantity;
     }
 } 

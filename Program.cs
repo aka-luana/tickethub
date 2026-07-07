@@ -1,5 +1,8 @@
-﻿using TicketHub.Application.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using TicketHub.Application.Interfaces;
+using TicketHub.Infrastructure.Persistence;
 using TicketHub.Infrastructure.Repositories.EventRepository;
+using TicketHub.Infrastructure.Repositories.ReservationRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +13,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
+builder.Services.AddDbContext<TicketHubDbContext>(options =>                                                                                                              
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 builder.Services.AddScoped<IEventRepository, EventRepository>();
+builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 
 var app = builder.Build();
 

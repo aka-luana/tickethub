@@ -10,9 +10,7 @@ public class Event
     public DateTime Date { get; private set; }
 
     public List<TicketType> TicketTypes { get; private set; } = new();
-
-    public List<SeatHold> Reservations { get; private set; } = new();
-
+    
     public Event()
     {
     }
