@@ -16,7 +16,7 @@ public class AddTicketTypeCommandHandler : IRequestHandler<AddTicketTypeCommand,
 
     public async Task<Result<Event>> Handle(AddTicketTypeCommand request, CancellationToken cancellationToken)
     {
-        var existing = await _eventRepository.GetByIdAsync(request.Id);
+        var existing = await _eventRepository.GetByIdAsync(request.Id, cancellationToken);
         if (existing == null)
         {
             return Result<Event>.Failure("Event not found");
@@ -42,7 +42,7 @@ public class AddTicketTypeCommandHandler : IRequestHandler<AddTicketTypeCommand,
 
         existing.TicketTypes.Add(ticketType);
         
-        var updated = await _eventRepository.UpdateAsync(request.Id, existing, cancellationToken);
+        var updated = await _eventRepository.UpdateAsync(existing, cancellationToken);
         
         return updated == null ? Result<Event>.Failure("Failed to add ticket type to event") : Result<Event>.Success(updated);
     }
