@@ -1,27 +1,45 @@
+using Microsoft.EntityFrameworkCore;
 using TicketHub.Application.Interfaces;
 using TicketHub.Domain.Entities;
+using TicketHub.Infrastructure.Persistence;
 
 namespace TicketHub.Infrastructure.Repositories.EventRepository;
 
 public class EventRepository : IEventRepository
 {
-    public Task<Event?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+    // usado para falar com o bd
+    private readonly TicketHubDbContext _context;
+
+    public EventRepository(TicketHubDbContext context)
     {
-        throw new NotImplementedException();
+        _context = context;
+    }
+    
+    public async Task<Event?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+    {
+        return await _context.Events
+            .Include(e => e.TicketTypes)
+            .FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
     }
 
-    public Task<List<Event>> GetAllAsync(CancellationToken cancellationToken)
+    public async Task<List<Event>> GetAllAsync(CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return await _context.Events
+            .Include(e => e.TicketTypes)
+            .ToListAsync(cancellationToken);
     }
 
-    public Task<Event?> AddAsync(Event e, CancellationToken cancellationToken)
+    public async Task<Event?> AddAsync(Event e, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        await _context.Events.AddAsync(e, cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
+        return e;
     }
 
-    public Task<Event?> UpdateAsync(Event e, CancellationToken cancellationToken)
+    public async Task<Event?> UpdateAsync(Event e, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        _context.Events.Update(e);
+        await _context.SaveChangesAsync(cancellationToken);
+        return e;
     }
 }
