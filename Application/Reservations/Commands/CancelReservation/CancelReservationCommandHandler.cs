@@ -7,9 +7,9 @@ namespace TicketHub.Application.Reservations.Commands.CancelReservation;
 
 public class CancelReservationCommandHandler : IRequestHandler<CancelReservationCommand, Result<SeatHold>>
 {
-    private readonly IReservationRepository _repository;
+    private readonly ISeatHoldRepository _repository;
 
-    public CancelReservationCommandHandler(IReservationRepository repository)
+    public CancelReservationCommandHandler(ISeatHoldRepository repository)
     {
         _repository = repository;
     }

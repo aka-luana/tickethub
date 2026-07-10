@@ -7,9 +7,9 @@ namespace TicketHub.Application.Reservations.Commands.CreateReservation;
 
 public class CreateReservationCommandHandler : IRequestHandler<CreateReservationCommand, Result<SeatHold>>
 {
-    private readonly IReservationRepository _repository;
+    private readonly ISeatHoldRepository _repository;
 
-    public CreateReservationCommandHandler(IReservationRepository repository)
+    public CreateReservationCommandHandler(ISeatHoldRepository repository)
     {
         _repository = repository;
     }

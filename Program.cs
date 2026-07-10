@@ -2,7 +2,8 @@
 using TicketHub.Application.Interfaces;
 using TicketHub.Infrastructure.Persistence;
 using TicketHub.Infrastructure.Repositories.EventRepository;
-using TicketHub.Infrastructure.Repositories.ReservationRepository;
+using TicketHub.Infrastructure.Repositories.OrderRepository;
+using TicketHub.Infrastructure.Repositories.SeatHoldRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +18,8 @@ builder.Services.AddDbContext<TicketHubDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IEventRepository, EventRepository>();
-builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
+builder.Services.AddScoped<ISeatHoldRepository, SeatHoldRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
 var app = builder.Build();
 

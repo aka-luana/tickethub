@@ -7,7 +7,6 @@ namespace TicketHub.Infrastructure.Repositories.EventRepository;
 
 public class EventRepository : IEventRepository
 {
-    // usado para falar com o bd
     private readonly TicketHubDbContext _context;
 
     public EventRepository(TicketHubDbContext context)
