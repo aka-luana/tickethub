@@ -7,6 +7,7 @@ public class SeatHold
     public Guid UserId { get; set; }
 
     public Guid TicketTypeId { get; set; }
+    public Guid EventId { get; set; }
 
     public int Quantity { get; set; }
 
@@ -14,10 +15,11 @@ public class SeatHold
 
     public DateTime ExpiresAt { get; set; }
     
-    public SeatHold(Guid userId, Guid ticketTypeId, int quantity, SeatHoldStatus status)
+    public SeatHold(Guid userId, Guid ticketTypeId, Guid eventId, int quantity, SeatHoldStatus status)
     {
         UserId = userId;
         TicketTypeId = ticketTypeId;
+        EventId = eventId;
         Quantity = quantity;
         Status = status;
         ExpiresAt = DateTime.UtcNow.AddMinutes(10);

@@ -4,4 +4,4 @@ using TicketHub.Domain.Entities;
 
 namespace TicketHub.Application.Reservations.Commands.CancelReservation;
 
-public record CancelReservationCommand(Guid ReservationId) : IRequest<Result<SeatHold>>;
+public record CancelReservationCommand(Guid SeatHoldId) : IRequest<Result<SeatHold>>;
