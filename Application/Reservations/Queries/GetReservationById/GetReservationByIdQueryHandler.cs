@@ -16,6 +16,13 @@ public class GetReservationByIdQueryHandler : IRequestHandler<GetReservationById
 
     public async Task<Result<Order>> Handle(GetReservationByIdQuery query, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var isValidAndNotEmpty = query.Id != Guid.Empty;
+        if (!isValidAndNotEmpty)
+        {
+            return Result<Order>.Failure(Error.IdIsEmptyError);
+        }
+
+        var orderResult = await _repository.GetByIdAsync(query.Id, cancellationToken);
+        return orderResult == null ? Result<Order>.Failure(Error.NotFoundError) : Result<Order>.Success(orderResult);
     }
 }
