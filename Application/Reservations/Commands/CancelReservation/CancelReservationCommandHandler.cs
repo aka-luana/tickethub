@@ -14,11 +14,20 @@ public class CancelReservationCommandHandler : IRequestHandler<CancelReservation
         _repository = repository;
     }
 
-    public async Task<Result<SeatHold>> Handle(CancelReservationCommand command,
-        CancellationToken cancellationToken)
+    public async Task<Result<SeatHold>> Handle(CancelReservationCommand command, CancellationToken cancellationToken)
     {
-        // todo: precisa implementar
-        
-        throw null;
+        var isValidAndNotEmpty = command.SeatHoldId != Guid.Empty;
+        if (!isValidAndNotEmpty)
+        {
+            return Result<SeatHold>.Failure(Error.IdIsEmptyError);
+        }
+
+        var seatHoldResult = await _repository.GetByIdAsync(command.SeatHoldId, cancellationToken);
+        if (seatHoldResult == null)
+            return Result<SeatHold>.Failure(Error.NotFoundError);
+
+        seatHoldResult.Status = SeatHoldStatus.Expired;
+        await _repository.UpdateAsync(seatHoldResult, cancellationToken);
+        return Result<SeatHold>.Success(seatHoldResult);
     }
 }

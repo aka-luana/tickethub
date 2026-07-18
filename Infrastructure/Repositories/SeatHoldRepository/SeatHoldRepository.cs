@@ -28,7 +28,7 @@ public class SeatHoldRepository : ISeatHoldRepository
         return seatHold;
     }
 
-    public async Task ExpireAsync(SeatHold seatHold, CancellationToken cancellationToken)
+    public async Task UpdateAsync(SeatHold seatHold, CancellationToken cancellationToken)
     {
         _context.SeatHolds.Update(seatHold);
         await _context.SaveChangesAsync(cancellationToken);

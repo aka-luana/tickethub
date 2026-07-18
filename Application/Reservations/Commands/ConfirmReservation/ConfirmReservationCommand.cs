@@ -4,4 +4,4 @@ using TicketHub.Domain.Entities;
 
 namespace TicketHub.Application.Reservations.Commands.ConfirmReservation;
 
-public record ConfirmReservationCommand(Guid ReservationId) : IRequest<Result<Order>>;
+public record ConfirmReservationCommand(Guid SeatHoldId) : IRequest<Result<Order>>;
