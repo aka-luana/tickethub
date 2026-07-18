@@ -17,6 +17,7 @@ public class SeatHold
     
     public SeatHold(Guid userId, Guid ticketTypeId, Guid eventId, int quantity, SeatHoldStatus status)
     {
+        Id = Guid.NewGuid();
         UserId = userId;
         TicketTypeId = ticketTypeId;
         EventId = eventId;
