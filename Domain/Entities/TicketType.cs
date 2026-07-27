@@ -13,7 +13,6 @@ public class TicketType
 
     public int TotalQuantity { get; set; }
     public int AvailableQuantity { get; set; }
-    public uint Version { get; set; }
 
     public TicketType(Guid eventId, string name, int tier, decimal price, int totalQuantity)
     {

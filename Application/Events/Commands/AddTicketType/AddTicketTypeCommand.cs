@@ -9,6 +9,5 @@ public record AddTicketTypeCommand(
         string Name,
         int Tier,
         decimal Price,
-        int TotalQuantity,
-        int AvailableQuantity
+        int TotalQuantity
     ) : IRequest<Result<Event>>;

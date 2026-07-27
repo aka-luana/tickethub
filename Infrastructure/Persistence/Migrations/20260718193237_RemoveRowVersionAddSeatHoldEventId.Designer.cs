@@ -2,18 +2,21 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TicketHub.Infrastructure.Persistence;
 
 #nullable disable
 
-namespace TicketHub.Infrastructure.Persistence.Migration
+namespace TicketHub.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(TicketHubDbContext))]
-    partial class TicketHubDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260718193237_RemoveRowVersionAddSeatHoldEventId")]
+    partial class RemoveRowVersionAddSeatHoldEventId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
