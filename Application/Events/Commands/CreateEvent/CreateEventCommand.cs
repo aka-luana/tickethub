@@ -8,8 +8,7 @@ public record TicketTypeInput(
     string Name,
     int Tier,
     decimal Price,
-    int TotalQuantity,
-    int AvailableQuantity
+    int TotalQuantity
 );
 
 public record CreateEventCommand(

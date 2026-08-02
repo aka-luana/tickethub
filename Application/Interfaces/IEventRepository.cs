@@ -8,4 +8,5 @@ public interface IEventRepository
     Task<List<Event>> GetAllAsync(CancellationToken cancellationToken);
     Task<Event?> AddAsync(Event e, CancellationToken cancellationToken);
     Task<Event?> UpdateAsync(Event e, CancellationToken cancellationToken);
+    Task AddTicketTypeAsync(TicketType ticketType, CancellationToken cancellationToken);
 }

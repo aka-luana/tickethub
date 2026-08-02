@@ -44,7 +44,7 @@ public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, Res
         foreach (var ticketTypeInput in command.TicketTypes)
         {
             var ticketType = new TicketType(
-                Guid.NewGuid(), // TODO: Arrumar depois para passar o id de event
+                newEvent.Id,
                 ticketTypeInput.Name,
                 ticketTypeInput.Tier,
                 ticketTypeInput.Price,

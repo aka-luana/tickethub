@@ -37,8 +37,13 @@ public class EventRepository : IEventRepository
 
     public async Task<Event?> UpdateAsync(Event e, CancellationToken cancellationToken)
     {
-        _context.Events.Update(e);
         await _context.SaveChangesAsync(cancellationToken);
         return e;
+    }
+
+    public async Task AddTicketTypeAsync(TicketType ticketType, CancellationToken cancellationToken)
+    {
+        _context.TicketTypes.Add(ticketType);
+        await _context.SaveChangesAsync(cancellationToken);
     }
 }

@@ -42,7 +42,7 @@ public class EventsController : ControllerBase
     public async Task<ActionResult<Event>> Create([FromBody] CreateEventDTO eventDto)
     {
         var ticketTypes = eventDto.TicketTypes
-            .Select(t => new TicketTypeInput(t.Name, t.Tier, t.Price, t.TotalQuantity, t.AvailableQuantity))
+            .Select(t => new TicketTypeInput(t.Name, t.Tier, t.Price, t.TotalQuantity))
             .ToList();
 
         var command = new CreateEventCommand(
@@ -70,8 +70,7 @@ public class EventsController : ControllerBase
             eventDto.Name,
             eventDto.Tier,
             eventDto.Price,
-            eventDto.TotalQuantity,
-            eventDto.AvailableQuantity
+            eventDto.TotalQuantity
         );
         
         var result = await _mediator.Send(command);

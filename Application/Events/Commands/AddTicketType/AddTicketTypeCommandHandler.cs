@@ -34,16 +34,16 @@ public class AddTicketTypeCommandHandler : IRequestHandler<AddTicketTypeCommand,
         }
 
         var ticketType = new TicketType(
-            Guid.NewGuid(), //TODO: Arrumar depois para passar o id correto do event
+            existing.Id,
             request.Name,
             request.Tier,
             request.Price,
             request.TotalQuantity);
 
         existing.TicketTypes.Add(ticketType);
-        
-        var updated = await _eventRepository.UpdateAsync(existing, cancellationToken);
-        
-        return updated == null ? Result<Event>.Failure("Failed to add ticket type to event") : Result<Event>.Success(updated);
+
+        await _eventRepository.AddTicketTypeAsync(ticketType, cancellationToken);
+
+        return Result<Event>.Success(existing);
     }
 }
