@@ -19,8 +19,9 @@ public class Order
     
     public Order(){}
 
-    public Order(Guid userId, Guid eventId, Guid ticketTypeId, int quantity, decimal totalPrice)
+    public Order(Guid id, Guid userId, Guid eventId, Guid ticketTypeId, int quantity, decimal totalPrice)
     {
+        Id = id;
         UserId = userId;
         EventId = eventId;
         TicketTypeId = ticketTypeId;
