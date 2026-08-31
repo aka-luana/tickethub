@@ -43,7 +43,7 @@ public class ConfirmReservationCommandHandler : IRequestHandler<ConfirmReservati
         seatHold.Status = SeatHoldStatus.Converted;
         await _seatHoldRepository.UpdateAsync(seatHold, cancellationToken);
 
-        var order = new Order(seatHold.UserId, seatHold.EventId, seatHold.TicketTypeId, seatHold.Quantity, totalPrice);
+        var order = new Order(command.SeatHoldId, seatHold.UserId, seatHold.EventId, seatHold.TicketTypeId, seatHold.Quantity, totalPrice);
         var createdOrder = await _orderRepository.CreateAsync(order, cancellationToken);
 
         return Result<Order>.Success(createdOrder);
